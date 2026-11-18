@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<!--
+  PORTFOLIO PROFISSIONAL - Builders Club
+  Pagina pronta pro aluno publicar como seu portfolio/cartao de visitas.
+  Self-contained: depende so das fontes Google (Playfair Display + Poppins).
+  Sem build, sem JS externo, sem framework. Funciona aberto direto (file://) e publicado.
+
+  COMO PERSONALIZAR (Ctrl+F):
+    [SEU NOME]     -> seu nome
+    [SUA CIDADE]   -> sua cidade
+    SEU_WHATSAPP   -> seu numero so com numeros (ex: 5585999998888)
+    [SEU EMAIL]    -> seu e-mail
+  Guias completos: _GUIA-personalizar.md e _GUIA-publicar-github-pages.md
+-->
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Priscila Santos | Sites, agentes de IA e sistemas</title>
+<meta name="description" content="Crio sites, sistemas e agentes de IA para empresas de [SUA CIDADE] que querem atrair mais clientes e construir autoridade online.">
+<meta name="theme-color" content="#F7F1E8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23263B2A'/%3E%3C/svg%3E">
+<style>
+  :root {
+    color-scheme: light;
+    --cream: #F7F1E8;
+    --sage: #DDE2D1;
+    --olive: #263B2A;
+    --gold: #C49A55;
+    --warm-white: #FFFCF7;
+    --ink: #20231F;
+    --muted: #62675E;
+    --coral: #D98176;
+    --line: rgba(38, 59, 42, .16);
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'Poppins', Arial, sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+  body { margin: 0; background: var(--cream); color: var(--ink); font-family: var(--sans); }
+  a { color: inherit; text-decoration: none; }
+  a:hover { color: var(--olive); }
+  a:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+  ::selection { background: var(--sage); color: var(--olive); }
+  img { display: block; max-width: 100%; }
+  p { text-wrap: pretty; }
+
+  @keyframes floatPhone {
+    0%, 100% { transform: translate(-50%, -50%); }
+    50% { transform: translate(-50%, calc(-50% - 8px)); }
+  }
+  @keyframes cursorBlink {
+    0%, 48% { opacity: 1; }
+    49%, 100% { opacity: 0; }
+  }
+
+  .page { overflow: hidden; }
+  .container { width: min(1120px, calc(100% - 56px)); margin: 0 auto; }
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(247, 241, 232, .94);
+    border-bottom: 1px solid rgba(196, 154, 85, .42);
+    backdrop-filter: blur(12px);
+  }
+  .header-inner {
+    width: min(1120px, calc(100% - 56px));
+    min-height: 82px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+  }
+  .brand { display: inline-flex; align-items: baseline; gap: 1px; white-space: nowrap; }
+  .brand-mark { color: var(--gold); font: 600 18px/1 var(--sans); }
+  .brand-copy { display: flex; flex-direction: column; gap: 3px; }
+  .brand-name { color: var(--ink); font-size: 18px; font-weight: 600; line-height: 1.05; letter-spacing: .18em; }
+  .brand-mark, .brand-name-priscila { background: linear-gradient(105deg, #263B2A 0%, #40533A 100%); color: #263B2A; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .brand-role { color: var(--muted); font-size: 10px; font-weight: 500; line-height: 1.2; letter-spacing: .2em; }
+  .main-nav { display: flex; align-items: center; justify-content: center; gap: 30px; margin-left: auto; }
+  .main-nav-links { display: flex; align-items: center; gap: inherit; }
+  .main-nav a { color: var(--ink); font-size: 12px; font-weight: 500; transition: color .2s; }
+  .main-nav a:hover { color: var(--gold); }
+  .menu-toggle {
+    display: none;
+    width: 42px;
+    height: 40px;
+    flex: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    border: 1px solid rgba(38, 59, 42, .2);
+    border-radius: 12px;
+    background: var(--warm-white);
+    color: var(--olive);
+    cursor: pointer;
+  }
+  .menu-toggle:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+  .menu-toggle span { width: 18px; height: 2px; border-radius: 2px; background: currentColor; transition: transform .2s, opacity .2s; }
+  .button {
+    min-height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 12px 22px;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    font: 500 13px/1.35 var(--sans);
+    transition: background .2s, color .2s, border-color .2s, transform .2s, box-shadow .2s;
+  }
+  .button-primary {
+    background: var(--olive);
+    color: var(--warm-white);
+    box-shadow: 0 8px 20px -12px rgba(38, 59, 42, .6);
+  }
+  .button-primary:hover { transform: translateY(-2px); background: #344D38; color: var(--warm-white); }
+  .button-outline { border-color: rgba(38, 59, 42, .58); color: var(--ink); background: transparent; }
+  .button-outline:hover { border-color: var(--gold); color: var(--olive); }
+  .button svg { flex: none; }
+
+  .hero {
+    position: relative;
+    background:
+      radial-gradient(ellipse at 82% 45%, rgba(221, 226, 209, .48), transparent 34%),
+      linear-gradient(180deg, var(--cream), #FBF7F0);
+  }
+  .hero-grid {
+    min-height: 495px;
+    padding: 50px 0 52px;
+    display: grid;
+    grid-template-columns: 1.03fr .97fr;
+    align-items: center;
+    gap: 50px;
+  }
+  .hero-copy { position: relative; z-index: 1; }
+  .eyebrow-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 7px 12px;
+    border: 1px solid rgba(196, 154, 85, .35);
+    border-radius: 999px;
+    background: rgba(255, 252, 247, .65);
+    color: var(--ink);
+    font-size: 11px;
+    font-weight: 500;
+  }
+  .eyebrow-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--olive); box-shadow: 0 0 0 3px rgba(38, 59, 42, .12); }
+  .h1-hero {
+    max-width: 640px;
+    margin: 17px 0 0;
+    color: var(--ink);
+    font: 500 clamp(43px, 5vw, 61px)/.99 var(--serif);
+    letter-spacing: -.045em;
+  }
+  .h1-hero em { color: var(--olive); font-weight: 500; }
+  .hero-description { max-width: 520px; margin: 20px 0 0; color: #42473F; font-size: 14px; line-height: 1.75; }
+  .hero-description strong { color: var(--ink); font-weight: 600; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 23px; }
+  .hero-actions .button { min-height: 46px; }
+  .benefits { display: flex; flex-wrap: wrap; gap: 13px 18px; margin-top: 23px; }
+  .benefit { display: flex; align-items: center; gap: 8px; color: #4B5048; font-size: 10px; line-height: 1.45; }
+  .benefit svg { flex: none; color: var(--gold); }
+
+  .hero-art { display: flex; align-items: center; justify-content: center; }
+  .hero-art-visual { position: relative; width: 110%; aspect-ratio: 1024 / 765; }
+  .hero-art-scene { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .hero-phone-wrap {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 38.5%;
+    transform: translate(-50%, -50%);
+    filter: drop-shadow(0 13px 15px rgba(38, 42, 31, .3));
+    animation: floatPhone 6s ease-in-out infinite;
+  }
+  .hero-phone-wrap img { width: 100%; height: auto; max-width: none; }
+  .phone-chat-overlay { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+  .typing-cursor {
+    position: absolute;
+    z-index: 1;
+    top: 90.2%;
+    left: 35.9%;
+    width: 1.5px;
+    height: 2.9%;
+    border-radius: 1px;
+    background: #92938D;
+    pointer-events: none;
+    animation: cursorBlink 1s steps(1, end) infinite;
+  }
+  .botanical { position: absolute; z-index: -1; width: 122px; color: var(--olive); opacity: .72; }
+
+  .section-pad { padding: 76px 0; }
+  .problem-section { position: relative; overflow: hidden; background: #F1EBDD; }
+  .problem-inner { position: relative; z-index: 1; }
+  .section-heading { max-width: 760px; margin: 0 auto; text-align: center; }
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+    color: var(--olive);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+  }
+  .section-label::before, .section-label::after { width: 38px; height: 1px; content: ""; background: var(--gold); }
+  .section-heading h2, .section-title {
+    margin: 12px 0 0;
+    color: var(--ink);
+    font: 500 clamp(31px, 4vw, 43px)/1.12 var(--serif);
+    letter-spacing: -.025em;
+  }
+  .section-heading h2 em { color: var(--olive); }
+  .section-heading p { max-width: 730px; margin: 12px auto 0; color: #4E514A; font-size: 13px; line-height: 1.7; }
+  .ad-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 30px; }
+  .compare-card { padding: 25px 27px; border: 1px solid var(--line); border-radius: 18px; background: var(--warm-white); transition: transform .2s, box-shadow .2s; }
+  .compare-card:hover { transform: translateY(-3px); box-shadow: 0 16px 36px -26px rgba(38, 59, 42, .35); }
+  .compare-card.before { border-color: rgba(217, 129, 118, .34); }
+  .compare-card.after { border-color: rgba(38, 59, 42, .2); background: var(--sage); }
+  .compare-title { display: flex; align-items: center; gap: 10px; margin-bottom: 17px; color: var(--ink); font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+  .compare-title-icon { width: 22px; height: 22px; display: grid; place-items: center; flex: none; border-radius: 50%; background: var(--coral); color: white; font-size: 13px; }
+  .after .compare-title-icon { background: var(--olive); }
+  .compare-list { display: flex; flex-direction: column; gap: 12px; }
+  .compare-item { display: flex; align-items: flex-start; gap: 10px; }
+  .compare-item p { margin: 0; color: #42463F; font-size: 11px; line-height: 1.55; }
+  .item-mark { width: 17px; height: 17px; display: grid; place-items: center; flex: none; margin-top: 1px; border-radius: 50%; background: rgba(217, 129, 118, .13); color: var(--coral); font-size: 11px; font-weight: 700; }
+  .after .item-mark { background: rgba(38, 59, 42, .12); color: var(--olive); }
+  .problem-botanical { left: -34px; bottom: -65px; width: 150px; opacity: .68; transform: rotate(-28deg); }
+
+  .services-section { background: var(--cream); }
+  .section-intro { max-width: 610px; }
+  .section-intro .section-label { justify-content: flex-start; }
+  .section-intro .section-title { max-width: 580px; }
+  .svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 34px; scroll-margin-top: 100px; }
+  .service-card { padding: 26px; border: 1px solid rgba(38, 59, 42, .13); border-radius: 18px; background: var(--warm-white); box-shadow: 0 14px 32px -28px rgba(38, 59, 42, .32); transition: transform .2s, box-shadow .2s; }
+  .service-card:hover { transform: translateY(-4px); box-shadow: 0 22px 40px -28px rgba(38, 59, 42, .34); }
+  .service-icon { width: 46px; height: 46px; display: grid; place-items: center; margin-bottom: 19px; border: 1px solid rgba(196, 154, 85, .38); border-radius: 14px; background: #F2EEE3; color: var(--olive); }
+  .service-card h3, .step h3 { margin: 0 0 9px; color: var(--ink); font: 600 18px/1.3 var(--serif); }
+  .service-card p, .step p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.75; }
+
+  .steps-section { background: var(--warm-white); }
+  .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; margin-top: 36px; }
+  .step-number { width: 40px; height: 40px; display: grid; place-items: center; margin-bottom: 16px; border: 1px solid rgba(196, 154, 85, .55); border-radius: 50%; background: var(--sage); color: var(--olive); font: 600 18px var(--serif); }
+
+  .about-section { background: #F0EEE4; }
+  .about-grid { display: grid; grid-template-columns: .78fr 1.22fr; align-items: center; gap: 54px; }
+  .about-grid > div:first-child { display: flex; flex-direction: column; align-items: flex-start; }
+  .about-photo {
+    position: relative;
+    width: 100%;
+    max-width: 380px;
+    aspect-ratio: 4 / 5;
+    margin-top: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(196, 154, 85, .55);
+    border-radius: 46% 46% 18px 18px;
+    background: var(--sage);
+    box-shadow: 12px 12px 0 rgba(221, 226, 209, .7);
+  }
+  .about-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
+  .about-copy .section-title { margin-top: 0; font-size: clamp(31px, 3.6vw, 39px); }
+  .about-copy p { margin: 18px 0 0; color: #4E514A; font-size: 13px; line-height: 1.8; }
+  .about-copy .button { margin-top: 22px; }
+
+  .cta-section { background: var(--sage); }
+  .cta-content { max-width: 720px; margin: 0 auto; padding: 72px 0; text-align: center; }
+  .cta-content .section-title { font-size: clamp(33px, 4vw, 45px); }
+  .cta-content p { max-width: 630px; margin: 16px auto 0; color: #4B5148; font-size: 13px; line-height: 1.75; }
+  .cta-content .button { margin-top: 24px; }
+
+  .site-footer { background: #F4EEE4; color: var(--ink); }
+  .footer-main { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 30px; padding: 38px 0; }
+  .footer-brand { max-width: 340px; }
+  .footer-brand-name { color: var(--olive); font: 600 16px var(--serif); letter-spacing: .12em; }
+  .footer-brand p { margin: 10px 0 0; color: #666B61; font-size: 11px; line-height: 1.7; }
+  .footer-links { display: flex; gap: 48px; }
+  .footer-column { display: flex; flex-direction: column; gap: 9px; }
+  .footer-column span:first-child { margin-bottom: 2px; color: var(--olive); font-size: 10px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+  .footer-column a, .footer-column span:not(:first-child) { color: #555A51; font-size: 11px; }
+  .footer-column a:hover { color: var(--gold); }
+  .footer-bottom { border-top: 1px solid rgba(38, 59, 42, .13); padding: 13px 0; color: #777A70; font-size: 10px; }
+  .floating-whatsapp { position: fixed; right: 22px; bottom: 20px; z-index: 60; box-shadow: 0 10px 24px -11px rgba(38, 59, 42, .65); }
+  .floating-whatsapp:hover { transform: translateY(-3px); }
+
+  @media (max-width: 900px) {
+    .container, .header-inner { width: min(100% - 44px, 700px); }
+    .header-inner { gap: 16px; }
+    .main-nav { gap: 17px; }
+    .header-cta { padding: 10px 15px; font-size: 11px; }
+    .hero-grid { min-height: 0; grid-template-columns: 1fr 1fr; gap: 22px; padding: 48px 0; }
+    .h1-hero { font-size: clamp(42px, 6vw, 53px); }
+    .benefits { gap: 11px 14px; }
+    .benefit { font-size: 9px; }
+    .svc-grid { grid-template-columns: 1fr 1fr; }
+    .section-pad { padding: 64px 0; }
+    .about-grid { gap: 34px; }
+  }
+  @media (max-width: 640px) {
+    html { scroll-padding-top: 126px; }
+    .container, .header-inner { width: calc(100% - 36px); }
+    .header-inner { min-height: 0; padding: 10px 0 11px; flex-wrap: wrap; gap: 9px 12px; }
+    .brand { gap: 1px; }
+    .brand-mark { font-size: 16px; }
+    .brand-name { font-size: 15px; letter-spacing: .12em; }
+    .brand-role { font-size: 9px; letter-spacing: .15em; }
+    .header-cta { min-height: 38px; gap: 6px; padding: 8px 12px; font-size: 10px; }
+    .header-cta svg { width: 14px; height: 14px; }
+    .main-nav { order: 3; width: 100%; align-items: stretch; flex-direction: column; justify-content: flex-start; gap: 0; padding-top: 4px; }
+    .menu-ready .menu-toggle { display: flex; align-self: flex-end; }
+    .menu-ready .main-nav-links { display: none; }
+    .menu-ready .main-nav.is-open .main-nav-links { display: flex; }
+    .main-nav-links { width: 100%; align-items: stretch; flex-direction: column; gap: 0; margin-top: 8px; padding: 6px 12px; border: 1px solid rgba(38, 59, 42, .12); border-radius: 14px; background: var(--warm-white); box-shadow: 0 10px 24px -18px rgba(38, 59, 42, .35); }
+    .main-nav-links a { padding: 10px 4px; font-size: 10px; }
+    .main-nav-links a + a { border-top: 1px solid rgba(38, 59, 42, .1); }
+    .main-nav.is-open .menu-toggle span:first-child { transform: translateY(7px) rotate(45deg); }
+    .main-nav.is-open .menu-toggle span:nth-child(2) { opacity: 0; }
+    .main-nav.is-open .menu-toggle span:last-child { transform: translateY(-7px) rotate(-45deg); }
+    .hero-grid { grid-template-columns: 1fr; gap: 24px; padding: 38px 0 42px; }
+    .h1-hero { max-width: 520px; font-size: clamp(40px, 10.4vw, 52px); }
+    .hero-description { font-size: 13px; }
+    .hero-actions { gap: 9px; }
+    .hero-actions .button { min-height: 44px; padding: 11px 16px; font-size: 11px; }
+    .benefits { gap: 11px 14px; margin-top: 18px; }
+    .benefit { max-width: 145px; font-size: 9px; }
+    .section-pad { padding: 56px 0; }
+    .section-heading h2, .section-title { font-size: 34px; }
+    .section-heading p { font-size: 12px; }
+    .ad-grid, .svc-grid, .steps-grid, .about-grid { grid-template-columns: 1fr; }
+    .ad-grid { gap: 13px; margin-top: 25px; }
+    .compare-card { padding: 22px 19px; }
+    .compare-item p { font-size: 11px; }
+    .svc-grid { gap: 13px; }
+    .service-card { padding: 23px; }
+    .steps-grid { gap: 23px; }
+    .about-grid { gap: 28px; }
+    .about-grid > div:first-child { align-items: center; }
+    .about-photo { max-width: 320px; margin: 16px 0 0; }
+    .cta-content { padding: 58px 0; }
+    .cta-content .section-title { font-size: 35px; }
+    .footer-main { padding: 32px 0; }
+    .footer-links { width: 100%; justify-content: space-between; gap: 20px; }
+    .floating-whatsapp { right: 14px; bottom: 14px; min-height: 44px; padding: 10px 15px; font-size: 11px; }
+  }
+  @media (max-width: 380px) {
+    .brand-name { font-size: 14px; }
+    .brand-role { font-size: 8px; letter-spacing: .12em; }
+    .header-cta { padding: 8px 9px; font-size: 9px; }
+    .main-nav { gap: 0; }
+    .main-nav-links a { font-size: 9px; }
+    .hero-actions { align-items: stretch; flex-direction: column; }
+    .hero-actions .button { width: 100%; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; }
+  }
+</style>
+</head>
+<body>
+<div id="top" class="page">
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#top" aria-label="Priscila Santos, início">
+        <span class="brand-mark" aria-hidden="true">P</span>
+        <span class="brand-copy">
+          <span class="brand-name"><span class="brand-name-priscila">RISCILA</span> SANTOS</span>
+          <span class="brand-role">WEB DESIGNER &amp; UI</span>
+        </span>
+      </a>
+      <nav class="main-nav" aria-label="Navegação principal">
+        <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-controls="primary-navigation-links" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="main-nav-links" id="primary-navigation-links">
+          <a href="#sobre">Sobre</a>
+          <a href="#servicos">Serviços</a>
+          <a href="#portfolio">Projetos</a>
+          <a href="#contato">Contato</a>
+        </div>
+      </nav>
+      <a class="button button-primary header-cta" href="https://wa.me/SEU_WHATSAPP?text=Oi!%20Vi%20o%20seu%20portf%C3%B3lio%20e%20queria%20saber%20mais." target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.3A8.4 8.4 0 1 1 21 11.5Z"/><path d="M9 9.2c.4 2.2 2.1 3.9 4.3 4.4l1-1 2 .9-.3 1.8c-4.3.8-9.2-4.1-8.4-8.4l1.8-.3.9 2-1.3.6Z"/></svg>
+        Chamar no WhatsApp
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow-pill"><span class="eyebrow-dot"></span>Presença digital que gera autoridade</div>
+          <h1 class="h1-hero" id="hero-title">Seu negócio cresce<br>quando o digital<br><em>trabalha por você.</em></h1>
+          <p class="hero-description">Crio sites, sistemas e agentes de IA para empresas de <strong>[SUA CIDADE]</strong> que querem atrair mais clientes e construir autoridade online, sem precisar entender nada de tecnologia.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="https://wa.me/SEU_WHATSAPP?text=Oi!%20Vi%20o%20seu%20portf%C3%B3lio%20e%20queria%20saber%20mais." target="_blank" rel="noopener">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.3A8.4 8.4 0 1 1 21 11.5Z"/><path d="M9 9.2c.4 2.2 2.1 3.9 4.3 4.4l1-1 2 .9-.3 1.8c-4.3.8-9.2-4.1-8.4-8.4l1.8-.3.9 2-1.3.6Z"/></svg>
+              Falar comigo agora
+            </a>
+            <a class="button button-outline" href="#servicos">Ver serviços <span aria-hidden="true">→</span></a>
+          </div>
+          <div class="benefits" aria-label="Vantagens">
+            <div class="benefit"><svg width="18" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 2 3.5 5v6.2c0 5 3.4 8.7 8.5 10.8 5.1-2.1 8.5-5.8 8.5-10.8V5L12 2Z"/><path d="m8.5 12 2.2 2.2 4.8-5"/></svg>Entrega em dias, não meses</div>
+            <div class="benefit"><svg width="19" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 21v-1.5a6.5 6.5 0 0 1 13 0V21M17 5a3.5 3.5 0 0 1 0 6.8M18 14a5.5 5.5 0 0 1 3.5 5.1V21"/></svg>Você fala direto comigo</div>
+            <div class="benefit"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="m12 2 3 6 7 1-5 5 1.2 7L12 18l-6.2 3L7 14l-5-5 7-1 3-6Z"/></svg>Qualidade e suporte contínuo</div>
+          </div>
+        </div>
+
+        <div class="hero-art">
+          <div class="hero-art-visual">
+            <svg class="hero-art-scene" viewBox="0 0 1024 765" fill="none" aria-hidden="true">
+              <path d="M500 91c118 0 233 30 302 97 64 62 76 157 45 248-27 79-32 157-96 214-69 61-168 61-274 36-92-22-162-78-198-154-31-65-43-124-76-190-34-68-5-139 61-188 61-46 145-63 236-63Z" fill="#B8BC94"/>
+              <ellipse cx="425" cy="505" rx="310" ry="164" transform="rotate(-16 425 505)" stroke="#B58E4F" stroke-width="2"/>
+              <g stroke="#283A2A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M682 665c62-91 103-192 151-297 29-63 44-128 38-196"/>
+                <path d="M831 390c-51-13-84-50-84-98 45 14 79 48 84 98Z"/>
+                <path d="M754 292c32 24 61 59 77 98"/>
+                <path d="M824 401c46-39 95-51 138-40-29 44-81 64-138 40Z"/>
+                <path d="M847 373c42-3 81-18 115-44"/>
+                <path d="M850 310c-41-34-53-77-38-119 38 31 54 74 38 119Z"/>
+                <path d="M817 240c16 20 29 43 33 70"/>
+                <path d="M868 250c28-42 63-62 98-59-18 40-51 63-98 59Z"/>
+                <path d="M871 191c26-42 25-92-1-137-29 40-33 91 1 137Z"/>
+                <path d="M771 491c45-52 96-75 151-66-34 51-84 77-151 66Z"/>
+                <path d="M867 453c19-15 38-25 55-28"/>
+                <path d="M755 517c-29-47-70-68-119-61 20 45 61 68 119 61Z"/>
+                <path d="M701 469c20 8 38 23 54 48"/>
+              </g>
+            </svg>
+            <div class="hero-phone-wrap">
+              <img src="foto/iphone-whatsapp.png" alt="iPhone dourado com uma conversa de atendimento pelo WhatsApp">
+              <svg class="phone-chat-overlay" viewBox="0 0 344 660" aria-hidden="true">
+                <defs>
+                  <clipPath id="phone-screen-bottom">
+                    <path d="M16 419H328V607C328 625 313 640 294 640H50C31 640 16 625 16 607Z"/>
+                  </clipPath>
+                  <linearGradient id="phone-chat-background" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0" stop-color="#EFE1D4"/>
+                    <stop offset="1" stop-color="#EDE0D0"/>
+                  </linearGradient>
+                </defs>
+                <g clip-path="url(#phone-screen-bottom)" font-family="Poppins, Arial, sans-serif">
+                  <rect x="16" y="419" width="312" height="222" fill="url(#phone-chat-background)"/>
+                  <rect x="72" y="425" width="238" height="101" rx="14" fill="#DDE9C4"/>
+                  <text x="86" y="447" fill="#20231F" font-size="13.5">Fechado! Agendei às 15h e te</text>
+                  <text x="86" y="466" fill="#20231F" font-size="13.5">mando um lembrete mais tarde</text>
+                  <text x="86" y="486" fill="#20231F" font-size="15" font-family="Segoe UI Emoji, sans-serif">👍</text>
+                  <text x="291" y="510" fill="#777B6E" font-size="10.5" text-anchor="end">09:42 ✓✓</text>
+
+                  <rect x="34" y="538" width="276" height="34" rx="17" fill="#087D70"/>
+                  <text x="172" y="559" fill="#FFFCF7" font-size="10.5" font-weight="600" text-anchor="middle">respondido em 4 segundos, sem você fazer nada</text>
+
+                  <rect x="26" y="583" width="246" height="47" rx="23.5" fill="#FFFCF7"/>
+                  <text x="42" y="612" fill="#92938D" font-size="14">Mensagem</text>
+                  <circle cx="301" cy="606.5" r="23" fill="#087D70"/>
+                  <path d="M290 599 313 606.5 290 614v-5l13-2.5-13-2.5Z" fill="#FFFCF7"/>
+                </g>
+              </svg>
+              <span class="typing-cursor" aria-hidden="true"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="problem-section" aria-labelledby="problem-title">
+      <svg class="botanical problem-botanical" viewBox="0 0 150 220" fill="none" aria-hidden="true">
+        <path d="M72 213C75 153 89 89 132 17M77 177C48 151 35 123 34 88c29 13 44 38 43 68M91 125c-3-37 8-66 37-91 8 34-3 65-37 91ZM63 202c-22-9-39-26-52-54 27 3 46 18 55 43" stroke="currentColor" stroke-width="1.15" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div class="container section-pad problem-inner">
+        <div class="section-heading">
+          <span class="section-label">O problema</span>
+          <h2 id="problem-title">Você reconhece alguma dessas <em>situações?</em></h2>
+          <p>Quase todo negócio perde cliente pelo mesmo motivo: a parte técnica trava. É exatamente aí que eu entro.</p>
+        </div>
+        <div class="ad-grid">
+          <article class="compare-card before">
+            <div class="compare-title"><span class="compare-title-icon" aria-hidden="true">×</span>Hoje, sem estrutura</div>
+            <div class="compare-list">
+              <div class="compare-item"><span class="item-mark" aria-hidden="true">×</span><p>Não tem clareza se seu site gera demanda de clientes pro negócio.</p></div>
+              <div class="compare-item"><span class="item-mark" aria-hidden="true">×</span><p>Mensagem no WhatsApp fica horas sem resposta e a venda esfria.</p></div>
+              <div class="compare-item"><span class="item-mark" aria-hidden="true">×</span><p>Agenda, cadastro e pedido tudo no caderno ou espalhado em vários grupos e planilhas.</p></div>
+            </div>
+          </article>
+          <article class="compare-card after">
+            <div class="compare-title"><span class="compare-title-icon" aria-hidden="true">✓</span>Depois, comigo</div>
+            <div class="compare-list">
+              <div class="compare-item"><span class="item-mark" aria-hidden="true">✓</span><p>Uma página que gera demanda e vendas pro negócio.</p></div>
+              <div class="compare-item"><span class="item-mark" aria-hidden="true">✓</span><p>Um agente que responde na hora, dia e noite, e não deixa venda escapar.</p></div>
+              <div class="compare-item"><span class="item-mark" aria-hidden="true">✓</span><p>Um sistema simples pra organizar agenda, clientes e pedidos num lugar só.</p></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="servicos" class="services-section section-pad" aria-labelledby="services-title">
+      <div class="container">
+        <div class="section-intro">
+          <span class="section-label">O que eu faço por você</span>
+          <h2 class="section-title" id="services-title">Três formas de trazer mais resultado pro seu negócio</h2>
+        </div>
+        <div id="portfolio" class="svc-grid">
+          <article class="service-card">
+            <div class="service-icon"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18M8 21h8"/></svg></div>
+            <h3>Site ou página que vende</h3>
+            <p>Um endereço profissional que aparece no Google e leva quem te acha direto pro seu WhatsApp, pronto pra fechar.</p>
+          </article>
+          <article class="service-card">
+            <div class="service-icon"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-9 8.5 8.5 8.5 0 0 1-3.9-.9L3 21l1.9-4.1A8.38 8.38 0 0 1 3.5 11 8.5 8.5 0 0 1 12 3a8.5 8.5 0 0 1 9 8.5Z"/></svg></div>
+            <h3>Agente no WhatsApp</h3>
+            <p>Responde seu cliente na hora, dia e noite, tira dúvidas e agenda por você. Nenhuma venda perdida por demora.</p>
+          </article>
+          <article class="service-card">
+            <div class="service-icon"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+            <h3>Sistema sob medida</h3>
+            <p>Agenda, cadastro e controle do seu jeito, num só lugar. Chega de anotar tudo no caderno e perder informação.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="steps-section section-pad" aria-labelledby="steps-title">
+      <div class="container">
+        <div class="section-intro">
+          <span class="section-label">Como funciona</span>
+          <h2 class="section-title" id="steps-title">Simples, do primeiro contato até a entrega</h2>
+        </div>
+        <div class="steps-grid">
+          <article class="step">
+            <div class="step-number">1</div>
+            <h3>Você me chama no WhatsApp</h3>
+            <p>A gente conversa sobre o seu negócio e onde dá pra ganhar mais cliente. Sem termo técnico.</p>
+          </article>
+          <article class="step">
+            <div class="step-number">2</div>
+            <h3>Eu monto a proposta</h3>
+            <p>Mostro o que faz sentido pro seu momento e combino um valor especial pro primeiro trabalho.</p>
+          </article>
+          <article class="step">
+            <div class="step-number">3</div>
+            <h3>Entrego e acompanho</h3>
+            <p>Coloco no ar e fico por perto pra ajustar o que precisar. Você não fica sozinho depois.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="sobre" class="about-section section-pad" aria-labelledby="about-title">
+      <div class="container about-grid">
+        <div>
+          <span class="section-label">Quem sou</span>
+          <div class="about-photo"><img src="foto/IMG_1166 (1).jpg" alt=""></div>
+        </div>
+        <div class="about-copy">
+          <h2 class="section-title" id="about-title">Sou a Priscila, de Salvador-BA.</h2>
+          <p>Comecei a trabalhar com tecnologia por um motivo simples: ajudar dono de negócio a vender mais e perder menos tempo com tarefa manual. Não gosto de complicar.</p>
+          <p>Meu trabalho é resolver um problema concreto do seu negócio e deixar a parte técnica comigo. Se você topar, o primeiro passo é uma conversa rápida no WhatsApp, sem compromisso.</p>
+          <a class="button button-primary" href="https://wa.me/SEU_WHATSAPP?text=Oi!%20Vi%20o%20seu%20portf%C3%B3lio%20e%20queria%20saber%20mais." target="_blank" rel="noopener">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.3A8.4 8.4 0 1 1 21 11.5Z"/><path d="M9 9.2c.4 2.2 2.1 3.9 4.3 4.4l1-1 2 .9-.3 1.8c-4.3.8-9.2-4.1-8.4-8.4l1.8-.3.9 2-1.3.6Z"/></svg>
+            Conversar comigo
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contato" class="cta-section" aria-labelledby="contact-title">
+      <div class="container cta-content">
+        <span class="section-label">Vamos juntas?</span>
+        <h2 class="section-title" id="contact-title">Vamos conversar sobre como usar tecnologia pra vender mais sem mais esforço?</h2>
+        <p>Me chama no WhatsApp. A conversa é rápida, sem compromisso, e você já sai com um caminho claro do que dá pra melhorar.</p>
+        <a class="button button-primary" href="https://wa.me/SEU_WHATSAPP?text=Oi!%20Vi%20o%20seu%20portf%C3%B3lio%20e%20queria%20saber%20mais." target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.3A8.4 8.4 0 1 1 21 11.5Z"/><path d="M9 9.2c.4 2.2 2.1 3.9 4.3 4.4l1-1 2 .9-.3 1.8c-4.3.8-9.2-4.1-8.4-8.4l1.8-.3.9 2-1.3.6Z"/></svg>
+          Falar comigo no WhatsApp
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-main">
+      <div class="footer-brand">
+        <div class="footer-brand-name"></div>
+        <p>Sites, agentes de WhatsApp e sistemas sob medida para negócios de [SUA CIDADE].</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-column">
+          <span>Contato</span>
+          <a href="https://wa.me/SEU_WHATSAPP?text=Oi!%20Vi%20o%20seu%20portf%C3%B3lio%20e%20queria%20saber%20mais." target="_blank" rel="noopener">WhatsApp</a>
+          <a href="mailto:[SEU EMAIL]">E-mail</a>
+        </div>
+        <div class="footer-column">
+          <span>Onde atuo</span>
+          <span>[SUA CIDADE]</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom"><div class="container">© 2026. Feito pra vender mais no digital.</div></div>
+  </footer>
+
+  <a class="button button-primary floating-whatsapp" href="https://wa.me/SEU_WHATSAPP?text=Oi!%20Vi%20o%20seu%20portf%C3%B3lio%20e%20queria%20saber%20mais." target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.3A8.4 8.4 0 1 1 21 11.5Z"/><path d="M9 9.2c.4 2.2 2.1 3.9 4.3 4.4l1-1 2 .9-.3 1.8c-4.3.8-9.2-4.1-8.4-8.4l1.8-.3.9 2-1.3.6Z"/></svg>
+    WhatsApp
+  </a>
+</div>
+<script>
+  const mainNav = document.querySelector('.main-nav');
+  const menuToggle = mainNav.querySelector('.menu-toggle');
+  const closeMenu = () => {
+    mainNav.classList.remove('is-open');
+    menuToggle.setAttribute('aria-expanded', 'false');
+    menuToggle.setAttribute('aria-label', 'Abrir menu');
+  };
+
+  document.documentElement.classList.add('menu-ready');
+  menuToggle.addEventListener('click', () => {
+    const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
+    mainNav.classList.toggle('is-open', !isOpen);
+    menuToggle.setAttribute('aria-expanded', String(!isOpen));
+    menuToggle.setAttribute('aria-label', isOpen ? 'Abrir menu' : 'Fechar menu');
+  });
+  mainNav.querySelectorAll('.main-nav-links a').forEach(link => link.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && menuToggle.getAttribute('aria-expanded') === 'true') {
+      closeMenu();
+      menuToggle.focus();
+    }
+  });
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 640) closeMenu();
+  });
+</script>
+</body>
+</html>
