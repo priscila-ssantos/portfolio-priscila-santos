@@ -276,17 +276,26 @@
   .cta-content p { max-width: 630px; margin: 16px auto 0; color: #4B5148; font-size: 13px; line-height: 1.75; }
   .cta-content .button { margin-top: 24px; }
 
-  .site-footer { background: #F4EEE4; color: var(--ink); }
-  .footer-main { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 30px; padding: 38px 0; }
-  .footer-brand { max-width: 340px; }
-  .footer-brand-name { color: var(--olive); font: 600 16px var(--serif); letter-spacing: .12em; }
-  .footer-brand p { margin: 10px 0 0; color: #666B61; font-size: 11px; line-height: 1.7; }
-  .footer-links { display: flex; gap: 48px; }
-  .footer-column { display: flex; flex-direction: column; gap: 9px; }
-  .footer-column span:first-child { margin-bottom: 2px; color: var(--olive); font-size: 10px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
-  .footer-column a, .footer-column span:not(:first-child) { color: #555A51; font-size: 11px; }
-  .footer-column a:hover { color: var(--gold); }
-  .footer-bottom { border-top: 1px solid rgba(38, 59, 42, .13); padding: 13px 0; color: #777A70; font-size: 10px; }
+  .site-footer { background: #F7F1E8; color: var(--ink); }
+  .footer-main { display: grid; grid-template-columns: 1.25fr 1fr .9fr .7fr; align-items: center; gap: 38px; min-height: 178px; padding: 34px 0 30px; }
+  .footer-brand { display: flex; align-items: center; gap: 11px; }
+  .footer-monogram { width: 74px; height: 74px; flex: none; }
+  .footer-brand-copy { display: flex; flex-direction: column; gap: 6px; }
+  .footer-brand-name { color: var(--olive); font: 500 20px/1 var(--serif); letter-spacing: .22em; }
+  .footer-brand-role { color: var(--muted); font-size: 6.5px; font-weight: 500; letter-spacing: .16em; }
+  .footer-profile { min-height: 74px; display: flex; flex-direction: column; justify-content: center; border-left: 1px solid rgba(196, 154, 85, .55); padding-left: 34px; }
+  .footer-profile-name { color: var(--ink); font: 500 19px/1.2 var(--serif); }
+  .footer-profile-role { margin-top: 5px; color: #777A70; font-size: 9px; letter-spacing: .14em; }
+  .footer-profile p { margin: 10px 0 0; color: #555A51; font-size: 10px; line-height: 1.55; }
+  .footer-socials { min-height: 74px; display: flex; flex-direction: column; justify-content: center; border-left: 1px solid rgba(196, 154, 85, .55); padding-left: 34px; }
+  .footer-heading { margin: 0 0 12px; color: var(--olive); font-size: 9px; font-weight: 600; }
+  .footer-social-links { display: flex; gap: 9px; }
+  .footer-social-links a { width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; background: #263B2A; color: var(--warm-white); transition: background .2s, transform .2s; }
+  .footer-social-links a:hover { background: #3E553E; transform: translateY(-2px); }
+  .footer-contact { min-height: 74px; display: flex; flex-direction: column; justify-content: center; border-left: 1px solid rgba(196, 154, 85, .55); padding-left: 34px; }
+  .footer-contact-link { display: inline-flex; align-items: center; gap: 8px; color: #555A51; font-size: 10px; }
+  .footer-contact-link svg { flex: none; }
+  .footer-bottom { border-top: 1px solid rgba(38, 59, 42, .15); padding: 11px 0; color: #777A70; font-size: 9px; text-align: center; }
   .floating-whatsapp { position: fixed; right: 22px; bottom: 20px; z-index: 60; box-shadow: 0 10px 24px -11px rgba(38, 59, 42, .65); }
   .floating-whatsapp:hover { transform: translateY(-3px); }
 
@@ -345,8 +354,14 @@
     .about-photo { max-width: 320px; margin: 16px 0 0; }
     .cta-content { padding: 58px 0; }
     .cta-content .section-title { font-size: 35px; }
-    .footer-main { padding: 32px 0; }
-    .footer-links { width: 100%; justify-content: space-between; gap: 20px; }
+    .footer-main { grid-template-columns: 1fr; gap: 0; min-height: 0; padding: 28px 0 20px; text-align: center; }
+    .footer-brand { justify-content: center; padding-bottom: 18px; }
+    .footer-monogram { width: 64px; height: 64px; }
+    .footer-profile, .footer-socials, .footer-contact { min-height: 0; align-items: center; border-left: 0; border-top: 1px solid rgba(196, 154, 85, .45); padding: 17px 0 0; }
+    .footer-profile { padding-bottom: 17px; }
+    .footer-socials { padding-bottom: 17px; }
+    .footer-contact { padding-bottom: 4px; }
+    .footer-heading { margin-bottom: 10px; }
     .floating-whatsapp { right: 14px; bottom: 14px; min-height: 44px; padding: 10px 15px; font-size: 11px; }
   }
   @media (max-width: 380px) {
@@ -594,21 +609,42 @@
   <footer class="site-footer">
     <div class="container footer-main">
       <div class="footer-brand">
-        <div class="footer-brand-name"></div>
-        <p>Sites, agentes de WhatsApp e sistemas sob medida para negócios de [SUA CIDADE].</p>
+        <svg class="footer-monogram" viewBox="0 0 48 48" aria-hidden="true">
+          <circle cx="24" cy="24" r="21.5" fill="none" stroke="#C49A55" stroke-width=".7"/>
+          <path d="M15 38V11c0-3 2-5 5-5h5c7 0 11 4 11 10 0 7-5 11-12 11h-9" fill="none" stroke="#263B2A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M20 37c7 0 13-3 13-9 0-5-4-7-9-7h-9" fill="none" stroke="#263B2A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M15 11c-3 7-3 15 0 22" fill="none" stroke="#263B2A" stroke-width="1.1" stroke-linecap="round"/>
+        </svg>
+        <span class="footer-brand-copy">
+          <span class="footer-brand-name">PRISASI</span>
+          <span class="footer-brand-role">ESTÚDIO DE DESENVOLVIMENTO</span>
+        </span>
       </div>
-      <div class="footer-links">
-        <div class="footer-column">
-          <span>Contato</span>
-          <a href="https://wa.me/5571992901025?text=Oi!%20Vi%20o%20seu%20portf%C3%B3lio%20e%20queria%20saber%20mais." target="_blank" rel="noopener">WhatsApp</a>
+      <div class="footer-profile">
+        <span class="footer-profile-name">Priscila Santos</span>
+        <span class="footer-profile-role">Desenvolvedora Web</span>
+        <p>Transformando ideias em soluções digitais.</p>
+      </div>
+      <nav class="footer-socials" aria-label="Redes sociais">
+        <h2 class="footer-heading">Redes sociais</h2>
+        <div class="footer-social-links">
+          <a href="https://github.com/priscila-ssantos" target="_blank" rel="noopener" aria-label="GitHub">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.46-1.15-1.12-1.46-1.12-1.46-.91-.62.07-.61.07-.61 1.01.07 1.54 1.04 1.54 1.04.9 1.53 2.35 1.09 2.92.83.09-.65.35-1.09.64-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.6 9.6 0 0 1 12 6.84c.85 0 1.71.11 2.51.34 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.86v2.76c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/in/priscila-santos-a49b00194/" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5.4 8.1H2.2V21h3.2V8.1ZM3.8 2A1.9 1.9 0 1 0 3.8 5.8 1.9 1.9 0 0 0 3.8 2ZM21.8 13.8c0-3.9-2.1-5.7-4.9-5.7-2.3 0-3.3 1.3-3.8 2.1V8.1h-3.2V21h3.2v-6.4c0-1.7.3-3.3 2.4-3.3 2.1 0 2.1 1.9 2.1 3.4V21h3.2l1-7.2Z"/></svg>
+          </a>
         </div>
-        <div class="footer-column">
-          <span>Onde atuo</span>
-          <span>[SUA CIDADE]</span>
-        </div>
+      </nav>
+      <div class="footer-contact">
+        <h2 class="footer-heading">Contato</h2>
+        <a class="footer-contact-link" href="https://wa.me/5571992901025?text=Oi!%20Vi%20o%20seu%20portf%C3%B3lio%20e%20queria%20saber%20mais." target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.3A8.4 8.4 0 1 1 21 11.5Z"/><path d="M9 9.2c.4 2.2 2.1 3.9 4.3 4.4l1-1 2 .9-.3 1.8c-4.3.8-9.2-4.1-8.4-8.4l1.8-.3.9 2-1.3.6Z"/></svg>
+          WhatsApp
+        </a>
       </div>
     </div>
-    <div class="footer-bottom"><div class="container">© 2026. Feito pra vender mais no digital.</div></div>
+    <div class="footer-bottom"><div class="container">© 2026 Prisasi. Todos os direitos reservados.</div></div>
   </footer>
 
   <a class="button button-primary floating-whatsapp" href="https://wa.me/5571992901025?text=Oi!%20Vi%20o%20seu%20portf%C3%B3lio%20e%20queria%20saber%20mais." target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
